@@ -4,151 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>파이썬 기초 퀴즈</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; }
-        .code-font { font-family: 'JetBrains Mono', Consolas, monospace; }
-        .choice-label:has(input:checked) {
-            border-color: #2563eb;
-            background-color: #eff6ff;
-            color: #1d4ed8;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 520px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 12px;
             font-weight: 600;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+        }
+        .input-group input:focus {
+            border-color: #2563eb;
+        }
+        .question-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        .question-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .choice-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.15s ease;
+        }
+        .choice-item:hover {
+            background-color: #f1f5f9;
+        }
+        .choice-item input {
+            margin-right: 10px;
+            width: 16px;
+            height: 16px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+        .submit-btn:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased pt-20 pb-20">
+<body>
 
-    <!-- 상단 바 -->
-    <header class="fixed top-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-4">
-        <div class="max-w-2xl h-full mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">정보</span>
-                <h1 class="text-base font-bold text-slate-800">파이썬 퀴즈</h1>
+    <div class="container">
+        <h1>파이썬 단원 형성평가</h1>
+
+        <!-- 학생 인적사항 -->
+        <div class="student-info">
+            <div class="input-group">
+                <label for="grade">학년</label>
+                <input type="text" id="grade" placeholder="예: 2">
             </div>
-            <button type="button" onclick="handleSubmit()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-lg shadow-sm transition active:scale-95 cursor-pointer">
-                제출하기
-            </button>
+            <div class="input-group">
+                <label for="classNum">반</label>
+                <input type="text" id="classNum" placeholder="예: 3">
+            </div>
+            <div class="input-group">
+                <label for="studentNum">번호</label>
+                <input type="text" id="studentNum" placeholder="예: 15">
+            </div>
+            <div class="input-group">
+                <label for="studentName">이름</label>
+                <input type="text" id="studentName" placeholder="예: 홍길동">
+            </div>
         </div>
-    </header>
 
-    <main class="max-w-2xl mx-auto px-4">
-        
-        <!-- 학생 인적사항 입력창 -->
-        <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 mb-6">
-            <h2 class="text-sm font-bold text-slate-700 mb-3">학생 정보 입력</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">학년</label>
-                    <input type="text" id="grade" placeholder="예: 1" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">반</label>
-                    <input type="text" id="classNum" placeholder="예: 2" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">번호</label>
-                    <input type="text" id="studentNum" placeholder="예: 10" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 mb-1">이름</label>
-                    <input type="text" id="studentName" placeholder="예: 김코딩" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
+        <!-- 4지선다 1문제 -->
+        <div class="question-box">
+            <span class="badge">문제 1</span>
+            <div class="question-title">
+                1. 파이썬에서 문자열이나 계산 결과를 화면에 출력할 때 사용하는 기본 함수는?
             </div>
-        </section>
-
-        <!-- 퀴즈 문항 -->
-        <form id="quiz-form" class="space-y-6">
-
-            <!-- [문제 1] -->
-            <article class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block mb-3">문제 1</span>
-                <h3 class="text-base font-bold text-slate-900 mb-4 leading-relaxed">
-                    1. 파이썬에서 문장이나 계산 결과를 화면에 출력할 때 사용하는 기본 함수는?
-                </h3>
-                <div class="space-y-2">
-                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
-                        <input type="radio" name="q1" value="1" class="w-4 h-4 text-blue-600">
-                        <span class="ml-3 text-sm">① <code class="code-font text-pink-600 font-semibold">input()</code></span>
-                    </label>
-                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
-                        <input type="radio" name="q1" value="2" class="w-4 h-4 text-blue-600">
-                        <span class="ml-3 text-sm">② <code class="code-font text-blue-600 font-semibold">print()</code></span>
-                    </label>
-                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
-                        <input type="radio" name="q1" value="3" class="w-4 h-4 text-blue-600">
-                        <span class="ml-3 text-sm">③ <code class="code-font text-slate-700 font-semibold">show()</code></span>
-                    </label>
-                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
-                        <input type="radio" name="q1" value="4" class="w-4 h-4 text-blue-600">
-                        <span class="ml-3 text-sm">④ <code class="code-font text-slate-700 font-semibold">write()</code></span>
-                    </label>
-                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
-                        <input type="radio" name="q1" value="5" class="w-4 h-4 text-blue-600">
-                        <span class="ml-3 text-sm">⑤ <code class="code-font text-slate-700 font-semibold">display()</code></span>
-                    </label>
-                </div>
-            </article>
-
-            <!-- [문제 2] -->
-            <article class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block mb-3">문제 2</span>
-                <h3 class="text-base font-bold text-slate-900 mb-3 leading-relaxed">
-                    2. 다음 파이썬 코드를 실행했을 때 화면에 출력되는 결과로 알맞은 것은?
-                </h3>
-                <div class="bg-slate-900 text-slate-100 rounded-xl p-3 my-3 text-sm code-font">
-                    <p><span class="text-cyan-400">print</span>(<span class="text-amber-400">10</span> + <span class="text-amber-400">5</span>)</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 mt-4">
-                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
-                        <input type="radio" name="q2" value="1" class="w-4 h-4 text-blue-600 mr-2">
-                        <span class="text-sm">① 5</span>
-                    </label>
-                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
-                        <input type="radio" name="q2" value="2" class="w-4 h-4 text-blue-600 mr-2">
-                        <span class="text-sm">② 10</span>
-                    </label>
-                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
-                        <input type="radio" name="q2" value="3" class="w-4 h-4 text-blue-600 mr-2">
-                        <span class="text-sm">③ 15</span>
-                    </label>
-                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
-                        <input type="radio" name="q2" value="4" class="w-4 h-4 text-blue-600 mr-2">
-                        <span class="text-sm">④ 50</span>
-                    </label>
-                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
-                        <input type="radio" name="q2" value="5" class="w-4 h-4 text-blue-600 mr-2">
-                        <span class="text-sm">⑤ 105</span>
-                    </label>
-                </div>
-            </article>
-
-        </form>
-    </main>
-
-    <!-- 제출 완료 안내 모달 -->
-    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 text-center">
-            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3 bg-emerald-100 text-emerald-600">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-                </svg>
+            <div class="choices">
+                <label class="choice-item">
+                    <input type="radio" name="q1" value="1">
+                    ① input()
+                </label>
+                <label class="choice-item">
+                    <input type="radio" name="q1" value="2">
+                    ② print()
+                </label>
+                <label class="choice-item">
+                    <input type="radio" name="q1" value="3">
+                    ③ show()
+                </label>
+                <label class="choice-item">
+                    <input type="radio" name="q1" value="4">
+                    ④ write()
+                </label>
             </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">제출이 완료되었습니다!</h3>
-            <p id="student-summary" class="text-xs text-slate-500 mb-4"></p>
-            <button type="button" onclick="closeModal()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition">
-                확인
-            </button>
         </div>
+
+        <button type="button" id="submitBtn" onclick="handleSubmit()" class="submit-btn">제출하기</button>
     </div>
 
-    <script>
+    <!-- Firebase SDK & 전송 로직 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAZkdSejSd07qftoIAkPDDLcKeT4aZRIf4",
+            authDomain: "test1-firebase-55993.firebaseapp.com",
+            projectId: "test1-firebase-55993",
+            storageBucket: "test1-firebase-55993.firebasestorage.app",
+            messagingSenderId: "153243578866",
+            appId: "1:153243578866:web:ffb121bb1a74431fb93b6b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         let isSubmitted = false;
 
-        function handleSubmit() {
+        window.handleSubmit = async function() {
             if (isSubmitted) {
                 alert("이미 제출이 완료되었습니다.");
                 return;
@@ -159,24 +209,41 @@
             const studentNum = document.getElementById("studentNum").value.trim();
             const studentName = document.getElementById("studentName").value.trim();
 
-            const info = [
-                grade ? `${grade}학년` : '',
-                classNum ? `${classNum}반` : '',
-                studentNum ? `${studentNum}번` : '',
-                studentName ? `${studentName}` : ''
-            ].filter(Boolean).join(' ') || '학생 정보 미기입';
+            const selectedChoice = document.querySelector('input[name="q1"]:checked');
+            const q1Val = selectedChoice ? selectedChoice.value : "미선택";
 
-            document.getElementById("student-summary").textContent = info;
-            document.getElementById("result-modal").classList.remove("hidden");
+            const submitBtn = document.getElementById("submitBtn");
 
-            // 제출 후 수정 방지
-            document.querySelectorAll("input").forEach(el => el.disabled = true);
-            isSubmitted = true;
-        }
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "제출 중...";
 
-        function closeModal() {
-            document.getElementById("result-modal").classList.add("hidden");
-        }
+                // Firestore 'quiz_submissions' 컬렉션에 데이터 추가
+                await addDoc(collection(db, "quiz_submissions"), {
+                    studentInfo: {
+                        grade: grade,
+                        classNum: classNum,
+                        studentNum: studentNum,
+                        studentName: studentName
+                    },
+                    answer: q1Val,
+                    submittedAt: serverTimestamp()
+                });
+
+                isSubmitted = true;
+                submitBtn.innerText = "제출 완료";
+                alert("답안이 성공적으로 제출되었습니다!");
+
+                // 답안 수정 방지
+                document.querySelectorAll("input").forEach(input => input.disabled = true);
+
+            } catch (error) {
+                console.error("전송 에러:", error);
+                alert("전송 중 오류가 발생했습니다. 브라우저 콘솔(F12)을 확인해주세요.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "제출하기";
+            }
+        };
     </script>
 </body>
 </html>
