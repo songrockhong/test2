@@ -23,4 +23,160 @@
 <body class="text-slate-800 antialiased pt-20 pb-20">
 
     <!-- 상단 바 -->
-    <header class="fixed top-0 left-0 right-0 h-16 bg-
+    <header class="fixed top-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40 px-4">
+        <div class="max-w-2xl h-full mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">정보</span>
+                <h1 class="text-base font-bold text-slate-800">파이썬 퀴즈</h1>
+            </div>
+            <button type="button" onclick="handleSubmit()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-lg shadow-sm transition active:scale-95 cursor-pointer">
+                제출하기
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4">
+        
+        <!-- 학생 인적사항 입력창 -->
+        <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 mb-6">
+            <h2 class="text-sm font-bold text-slate-700 mb-3">학생 정보 입력</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">학년</label>
+                    <input type="text" id="grade" placeholder="예: 1" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">반</label>
+                    <input type="text" id="classNum" placeholder="예: 2" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">번호</label>
+                    <input type="text" id="studentNum" placeholder="예: 10" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">이름</label>
+                    <input type="text" id="studentName" placeholder="예: 김코딩" class="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+        </section>
+
+        <!-- 퀴즈 문항 -->
+        <form id="quiz-form" class="space-y-6">
+
+            <!-- [문제 1] -->
+            <article class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block mb-3">문제 1</span>
+                <h3 class="text-base font-bold text-slate-900 mb-4 leading-relaxed">
+                    1. 파이썬에서 문장이나 계산 결과를 화면에 출력할 때 사용하는 기본 함수는?
+                </h3>
+                <div class="space-y-2">
+                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
+                        <input type="radio" name="q1" value="1" class="w-4 h-4 text-blue-600">
+                        <span class="ml-3 text-sm">① <code class="code-font text-pink-600 font-semibold">input()</code></span>
+                    </label>
+                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
+                        <input type="radio" name="q1" value="2" class="w-4 h-4 text-blue-600">
+                        <span class="ml-3 text-sm">② <code class="code-font text-blue-600 font-semibold">print()</code></span>
+                    </label>
+                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
+                        <input type="radio" name="q1" value="3" class="w-4 h-4 text-blue-600">
+                        <span class="ml-3 text-sm">③ <code class="code-font text-slate-700 font-semibold">show()</code></span>
+                    </label>
+                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
+                        <input type="radio" name="q1" value="4" class="w-4 h-4 text-blue-600">
+                        <span class="ml-3 text-sm">④ <code class="code-font text-slate-700 font-semibold">write()</code></span>
+                    </label>
+                    <label class="choice-label flex items-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
+                        <input type="radio" name="q1" value="5" class="w-4 h-4 text-blue-600">
+                        <span class="ml-3 text-sm">⑤ <code class="code-font text-slate-700 font-semibold">display()</code></span>
+                    </label>
+                </div>
+            </article>
+
+            <!-- [문제 2] -->
+            <article class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full inline-block mb-3">문제 2</span>
+                <h3 class="text-base font-bold text-slate-900 mb-3 leading-relaxed">
+                    2. 다음 파이썬 코드를 실행했을 때 화면에 출력되는 결과로 알맞은 것은?
+                </h3>
+                <div class="bg-slate-900 text-slate-100 rounded-xl p-3 my-3 text-sm code-font">
+                    <p><span class="text-cyan-400">print</span>(<span class="text-amber-400">10</span> + <span class="text-amber-400">5</span>)</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 mt-4">
+                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
+                        <input type="radio" name="q2" value="1" class="w-4 h-4 text-blue-600 mr-2">
+                        <span class="text-sm">① 5</span>
+                    </label>
+                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
+                        <input type="radio" name="q2" value="2" class="w-4 h-4 text-blue-600 mr-2">
+                        <span class="text-sm">② 10</span>
+                    </label>
+                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
+                        <input type="radio" name="q2" value="3" class="w-4 h-4 text-blue-600 mr-2">
+                        <span class="text-sm">③ 15</span>
+                    </label>
+                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
+                        <input type="radio" name="q2" value="4" class="w-4 h-4 text-blue-600 mr-2">
+                        <span class="text-sm">④ 50</span>
+                    </label>
+                    <label class="choice-label flex items-center justify-center p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition text-center">
+                        <input type="radio" name="q2" value="5" class="w-4 h-4 text-blue-600 mr-2">
+                        <span class="text-sm">⑤ 105</span>
+                    </label>
+                </div>
+            </article>
+
+        </form>
+    </main>
+
+    <!-- 제출 완료 안내 모달 -->
+    <div id="result-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 text-center">
+            <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3 bg-emerald-100 text-emerald-600">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">제출이 완료되었습니다!</h3>
+            <p id="student-summary" class="text-xs text-slate-500 mb-4"></p>
+            <button type="button" onclick="closeModal()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition">
+                확인
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let isSubmitted = false;
+
+        function handleSubmit() {
+            if (isSubmitted) {
+                alert("이미 제출이 완료되었습니다.");
+                return;
+            }
+
+            const grade = document.getElementById("grade").value.trim();
+            const classNum = document.getElementById("classNum").value.trim();
+            const studentNum = document.getElementById("studentNum").value.trim();
+            const studentName = document.getElementById("studentName").value.trim();
+
+            const info = [
+                grade ? `${grade}학년` : '',
+                classNum ? `${classNum}반` : '',
+                studentNum ? `${studentNum}번` : '',
+                studentName ? `${studentName}` : ''
+            ].filter(Boolean).join(' ') || '학생 정보 미기입';
+
+            document.getElementById("student-summary").textContent = info;
+            document.getElementById("result-modal").classList.remove("hidden");
+
+            // 제출 후 수정 방지
+            document.querySelectorAll("input").forEach(el => el.disabled = true);
+            isSubmitted = true;
+        }
+
+        function closeModal() {
+            document.getElementById("result-modal").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
